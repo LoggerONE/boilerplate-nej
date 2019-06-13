@@ -1,0 +1,8 @@
+{
+  "name": "boilerplate-nej",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/DeokME/boilerplate-nej.git",
+  "author": "DeokME <me@deok.me>",
+  "license": "MIT"
+}
