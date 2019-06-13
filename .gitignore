@@ -1,0 +1,10 @@
+/vendor
+/node_modules
+/bower_components
+/public/dist
+Homestead.yaml
+Homestead.json
+.env
+.env.save
+.ftp-simple.json
+setenv
