@@ -1,0 +1,7 @@
+apps:
+  - script   : 'index.js'
+    name     : 'Node Express JWT Boilerplate'
+    exec_mode: 'cluster'
+    instances: 3
+    watch  : true
+    ignore_watch : ["public", "resources", ".*", "node_modules"]

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+        <title>Deok.ME</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+        <!-- Styles -->
+        <style>
+            html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 100;
+                height: 100vh;
+                margin: 0;
+            }
+            .full-height {
+                height: 100vh;
+            }
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+            .position-ref {
+                position: relative;
+            }
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+            .content {
+                text-align: center;
+            }
+            .title {
+                font-size: 84px;
+            }
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+        </style>
+
+        
+        
+    </head>
+    <body>
+        <div class="flex-center position-ref full-height">
+
+            <div class="content">
+                <div class="text-center" style="padding:50px 0">
+                    <div class="title m-b-md">Login</div>
+                    <!-- Main Form -->
+                    <div class="login-form-1">
+                        <form id="login-form" class="text-left">
+                            <div class="login-form-main-message"></div>
+                            <div class="main-login-form">
+                                <div class="login-group">
+                                    <div class="form-group">
+                                        <label for="lg_username" class="sr-only">Username</label>
+                                        <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lg_password" class="sr-only">Password</label>
+                                        <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
+                                    </div>
+                
+                                </div>
+                                <button type="submit" class="btn btn-primary login-button">Submit</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <!-- end:Main Form -->
+                </div>
+                
+            </div>
+        </div>
+    </body>
+</html>

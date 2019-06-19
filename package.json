@@ -4,5 +4,17 @@
   "main": "index.js",
   "repository": "https://github.com/DeokME/boilerplate-nej.git",
   "author": "DeokME <me@deok.me>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "connect-redis": "^3.4.1",
+    "cookie-parse": "^0.4.0",
+    "cookie-parser": "^1.4.4",
+    "csurf": "^1.10.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "i18n": "^0.8.3",
+    "jsonwebtoken": "^8.5.1"
+  }
 }
