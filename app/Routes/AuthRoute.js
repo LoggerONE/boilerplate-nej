@@ -26,6 +26,20 @@ router.get('/findPassword', [], function(req, res, next) {
 		"state_code" : "100",
 		"state_message" : "ok" 
 	}
+
+	console.log(req.params.authCode)
+	res.render('auth/findPassword',resData);
+});
+/*
+  express optional params :params?
+*/
+router.get('/chpass/:authCode', [], function(req, res, next) {
+	var resData = {
+		"state_code" : "100",
+		"state_message" : "ok" 
+	}
+
+	console.log(req.params.authCode)
 	res.render('auth/findPassword',resData);
 });
 
