@@ -2,13 +2,12 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-var csrf = require('csurf');
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
-var	path = require('path');
-var	i18n = require("i18n");
-var redis = require("redis");
-
+const csrf = require('csurf');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const	path = require('path');
+const	i18n = require("i18n");
+const redis = require("redis");
 
 require('dotenv').config({path: __dirname + '/.env' }); 
 ENV = process.env;
@@ -19,19 +18,6 @@ appRoot = path.dirname(require.main.filename);
 
 var db = require('./config/mongoose')
 
-/* Mongoose TEST */
-/*
-    var mongoose = require("mongoose");
-    var db = mongoose.connection;
-    db.on('error', console.error);
-    db.once('open', function(){
-        // CONNECTED TO MONGODB SERVER
-        console.log("Connected to mongod server");
-    });
-    mongoose.set('useCreateIndex', true) 
-    mongoose.connect(ENV.DB_URL, { useNewUrlParser: true });
-*/
-
 var port =  Number(ENV.PORT)
 
 if(ENV.NODE_APP_INSTANCE !== undefined){
@@ -39,6 +25,8 @@ if(ENV.NODE_APP_INSTANCE !== undefined){
 }
 
 var redis_conf = require('./config/redis');
+redis_common = redis.createClient(redis_conf.redis_common); // global redis connection
+
 
 app.use(cookieParser(ENV.APP_KEY));
 app.use(bodyParser.json());
@@ -48,7 +36,7 @@ console.log("APPKEY : ", ENV.APP_KEY);
 console.log("SET SESSION");
 
 /* ============ View Engine Setup ============ */
-app.set('views', path.join(__dirname, './resources/views'));
+app.set('views', path.join(__dirname, './resources/views')); 
 app.set('view engine', 'ejs');
 
 /* ============ Static Path Setup ============ */

@@ -1,6 +1,7 @@
 var UsersMdl = require('../Models/UserModel');
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken');
+const tokenList = {}
 
 const connectDb = () => {
     return mongoose.connect(ENV.DB_URL);
@@ -9,8 +10,6 @@ const connectDb = () => {
 //var User = require('mongoose');
 
 exports.signup = function(req, res){
-
-    console.log(req.body)
 
     UsersMdl.create( {
         username: req.body.username,
@@ -45,7 +44,14 @@ exports.signin = function(req, res) {
             return res.status(500).json(resData);
         } else {
             if(bcrypt.compareSync(req.body.password, userInfo.password)) {
-                const token = jwt.sign({id: userInfo._id}, ENV.APP_KEY, { expiresIn: '1h' });
+                const token = jwt.sign({id: userInfo._id}, ENV.APP_KEY, { expiresIn: ENV.JWT_ACCESS_TOKEN_LIFETIME });
+                var testSet = {
+                    'token' : token
+                }
+
+                // Set User Access Token and Refresh Token
+                redis_common.set('user:' + userInfo._id, JSON.stringify(testSet) );
+
                 console.log(token)
                 res.json({status:"success", message: "success", data:{user: userInfo.username, token:token}});
             }else{
@@ -70,5 +76,22 @@ exports.chPass = function(req, res){
 }
 
 exports.refresh = function(req, res){
+    const postData = req.body
+
+    if((postData.refreshToken) && (postData.refreshToken in tokenList)) {
+        const user = {
+            "email": postData.email,
+            "name": postData.name
+        }
+        const token = jwt.sign(user, config.secret, { expiresIn: config.tokenLife})
+        const response = {
+            "token": token,
+        }
+        // update the token in the list
+        tokenList[postData.refreshToken].token = token
+        res.status(200).json(response);        
+    } else {
+        res.status(404).send('Invalid request')
+    }    
 
 }
