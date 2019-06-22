@@ -25,10 +25,10 @@ $('document').ready(function(){
             0. validation
             1. request
         */
-        var username = $.trim($("#signup-username").val());
-        var email = $.trim($("#signup-email").val());
-        var password = $.trim($("#signup-password").val());
-        var password_confirm = $.trim($("#signup-password-confirm").val());
+        var username = $.trim($("#signup_username").val());
+        var email = $.trim($("#signup_email").val());
+        var password = $.trim($("#signup_password").val());
+        var password_confirm = $.trim($("#signup_password_confirm").val());
 
         
 

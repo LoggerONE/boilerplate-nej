@@ -17,20 +17,20 @@ SERVER_DIR = __dirname;
 utils = require('./app/Middleware/utils');
 appRoot = path.dirname(require.main.filename);
 
+var db = require('./config/mongoose')
 
 /* Mongoose TEST */
 /*
-var mongoose = require("mongoose");
-var db = mongoose.connection;
-db.on('error', console.error);
-db.once('open', function(){
-    // CONNECTED TO MONGODB SERVER
-    console.log("Connected to mongod server");
-});
-mongoose.set('useCreateIndex', true) 
-mongoose.connect(ENV.DB_URL, { useNewUrlParser: true });
+    var mongoose = require("mongoose");
+    var db = mongoose.connection;
+    db.on('error', console.error);
+    db.once('open', function(){
+        // CONNECTED TO MONGODB SERVER
+        console.log("Connected to mongod server");
+    });
+    mongoose.set('useCreateIndex', true) 
+    mongoose.connect(ENV.DB_URL, { useNewUrlParser: true });
 */
-
 
 var port =  Number(ENV.PORT)
 
