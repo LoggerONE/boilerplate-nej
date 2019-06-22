@@ -1,4 +1,6 @@
 var UsersMdl = require('../Models/UserModel');
+const bcrypt = require('bcrypt'); 
+const jwt = require('jsonwebtoken');
 
 const connectDb = () => {
     return mongoose.connect(ENV.DB_URL);
@@ -17,6 +19,7 @@ exports.signup = function(req, res){
     },
         function(err, user) {
             if (err){
+                console.log(err)
                 var resData = {
                     "state_code" : "200",
                     "state_message" : "error"
@@ -32,13 +35,25 @@ exports.signup = function(req, res){
 exports.signin = function(req, res) {
     var email = req.body.email; 
     var password = req.body.password;
-    console.log(email)
-    var resData = {
-        "state_code" : "100",
-        "state_message" : "ok",
-        "email" : email
-    }
-    res.json(resData)
+    
+    UsersMdl.findOne({email:req.body.email}, function(err, userInfo){
+        if (err) {
+            var resData = {
+                "state_code" : "200",
+                "state_message" : "error"
+            }
+            return res.status(500).json(resData);
+        } else {
+            if(bcrypt.compareSync(req.body.password, userInfo.password)) {
+                const token = jwt.sign({id: userInfo._id}, ENV.APP_KEY, { expiresIn: '1h' });
+                console.log(token)
+                res.json({status:"success", message: "success", data:{user: userInfo.username, token:token}});
+            }else{
+                res.json({status:"error", message: "Invalid email/password", data:null});
+            }
+        }
+    });
+
 };
 
 /* Send Code for change password */
