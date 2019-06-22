@@ -9,6 +9,7 @@ var	path = require('path');
 var	i18n = require("i18n");
 var redis = require("redis");
 
+
 require('dotenv').config({path: __dirname + '/.env' }); 
 ENV = process.env;
 SERVER_DIR = __dirname;
@@ -16,6 +17,19 @@ SERVER_DIR = __dirname;
 utils = require('./app/Middleware/utils');
 appRoot = path.dirname(require.main.filename);
 
+
+/* Mongoose TEST */
+/*
+var mongoose = require("mongoose");
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
+});
+mongoose.set('useCreateIndex', true) 
+mongoose.connect(ENV.DB_URL, { useNewUrlParser: true });
+*/
 
 
 var port =  Number(ENV.PORT)

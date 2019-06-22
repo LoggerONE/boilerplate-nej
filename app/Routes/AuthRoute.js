@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 var AuthCtr = require('../Controllers/AuthController');
 
@@ -7,20 +7,14 @@ var AuthCtr = require('../Controllers/AuthController');
 router.get('/', [], function(req, res, next) {
 	res.render('auth/signin');
 });
-router.post('/signin', AuthCtr.signin);
+router.post('/signin', AuthCtr.signin)
 
 
 /* Router SingUp */
 router.get('/signup', [], function(req, res, next) {
 
 	res.render('auth/signup');
-}).post('/signup',[], function(req, res, next) {
-	var resData = {
-		"state_code" : "100",
-		"state_message" : "ok" 
-	}
-	res.json(resData);
-});
+}).post('/signup',[], AuthCtr.signup)
 
 /* Router FindPassword */
 router.get('/findPassword', [], function(req, res, next) {
@@ -31,13 +25,7 @@ router.get('/findPassword', [], function(req, res, next) {
 
 	console.log(req.params.authCode)
 	res.render('auth/findPassword',resData);
-}).post('/findPassword',[], function(req, res, next) {
-	var resData = {
-		"state_code" : "100",
-		"state_message" : "ok" 
-	}
-	res.render('auth/signup',resData);
-});
+}).post('/findPassword',[], AuthCtr.sendChPassCode);
 
 /*
   express optional params :params?
@@ -50,23 +38,11 @@ router.get('/chpass/:authCode', [], function(req, res, next) {
 
 	console.log(req.params.authCode)
 	res.render('auth/findPassword',resData);
-}).post('/chpass',[], function(req, res, next) {
-	var resData = {
-		"state_code" : "100",
-		"state_message" : "ok" 
-	}
-	res.render('auth/signup',resData);
-});
+}).post('/chpass',[], AuthCtr.chPass)
 
 /*
 	Token expire refresh token
 */
-router.post('/refresh', [], function(req, res, next) {
-	var resData = {
-		"state_code" : "100",
-		"state_message" : "ok" 
-	}
-	res.json(resData);
-})
+router.post('/refresh', [], AuthCtr.refresh)
 
-module.exports = router;
+module.exports = router
