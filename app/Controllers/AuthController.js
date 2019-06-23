@@ -32,6 +32,9 @@ exports.signup = function(req, res){
 };
 
 exports.signin = function(req, res) {
+
+    
+
     var email = req.body.email; 
     var password = req.body.password;
     
@@ -42,18 +45,26 @@ exports.signin = function(req, res) {
                 "state_message" : "error"
             }
             return res.status(500).json(resData);
+            
         } else {
+
             if(bcrypt.compareSync(req.body.password, userInfo.password)) {
                 const token = jwt.sign({id: userInfo._id}, ENV.APP_KEY, { expiresIn: ENV.JWT_ACCESS_TOKEN_LIFETIME });
+                const refreshToken = jwt.sign({id: userInfo._id}, ENV.APP_KEY, { expiresIn: ENV.JWT_REFRESH_TOKEN_LIFETIME })
+                
                 var testSet = {
-                    'token' : token
+                    'token' : token,
+                    'refreshToken' : refreshToken
                 }
 
                 // Set User Access Token and Refresh Token
                 redis_common.set('user:' + userInfo._id, JSON.stringify(testSet) );
 
-                console.log(token)
-                res.json({status:"success", message: "success", data:{user: userInfo.username, token:token}});
+                res.json({status:"success", message: "success", data:{
+                        user: userInfo.username, 
+                        token : token,
+                        refreshToken : refreshToken
+                    }});
             }else{
                 res.json({status:"error", message: "Invalid email/password", data:null});
             }
