@@ -4,4 +4,4 @@ apps:
     exec_mode: 'cluster'
     instances: 3
     watch  : true
-    ignore_watch : ["public", "resources", ".*", "node_modules"]
+    ignore_watch : ["public", "resources", ".*", "node_modules", "README.md"]

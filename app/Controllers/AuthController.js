@@ -1,11 +1,14 @@
-var UsersMdl = require('../Models/UserModel');
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken');
+
+// require Controllers
+const MailerCtr = require('./MailerController')
+
+// require Models
+const UsersMdl = require('../Models/UserModel');
+
 const tokenList = {}
 
-const connectDb = () => {
-    return mongoose.connect(ENV.DB_URL);
-};
 
 //var User = require('mongoose');
 
@@ -32,8 +35,6 @@ exports.signup = function(req, res){
 };
 
 exports.signin = function(req, res) {
-
-    
 
     var email = req.body.email; 
     var password = req.body.password;
@@ -79,6 +80,8 @@ exports.sendChPassCode = function(req, res){
         "state_code" : "100",
         "state_message" : "ok",
     }
+
+    MailerCtr.sendMail('noreply@wrdevs.com','dnejrwhd@gmail.com');
     res.json(resData)
 }
 
