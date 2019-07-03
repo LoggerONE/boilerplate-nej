@@ -64,6 +64,9 @@ POST : http://localhost:8080/v1/json
 
 > [POST] /auth/chpass - Change user password request
 
+### Refresh Token
+
+> [POST] /auth/refresh - Refresh Token by Refresh Token
 
 # Change Logs
 #### 0.1  - Added redis and mongodb for save users
