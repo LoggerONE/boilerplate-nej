@@ -40,25 +40,25 @@ POST : http://localhost:8080/v1/json
 
 # Authentication Routes
 
-### Sign In
-
-> [GET] /auth - Page SignIn
-
-> [POST] /auth/signin - SignIn post request
-
 ### Signup 
 
-> [GET] /auth/signup - Page SignUp 
+> [GET] /auth/signup - Page for SignUp
 
-> [POST] /auth/signup - SignUp post request
+> [POST] /auth/signup - SignUp request
+
+### Sign In
+
+> [GET] /auth - Page for SignIn
+
+> [POST] /auth/signin - SignIn request
 
 ### Find Password
 
-> [GET] /auth/findPassword - Page send password change code
+> [GET] /auth/findPassword - Page for password reset
 
-> [POST] /auth/findPAssword - Send change password code
+> [POST] /auth/findPAssword - Send a code to email for change password
 
-> [GET] /auth/chpass/:authCode - Change User Password * require authCode
+> [GET] /auth/chpass/:authCode - Change user password * require authCode
 
 
 # Change Logs
