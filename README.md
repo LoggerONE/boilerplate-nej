@@ -69,5 +69,6 @@ POST : http://localhost:8080/v1/json
 > [POST] /auth/refresh - Refresh by refreshToken
 
 # Change Logs
+#### 20190703-1 : Added change password request & method using redis + redis expire
 #### 0.1  - Added redis and mongodb for save users
 
