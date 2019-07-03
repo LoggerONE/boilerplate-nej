@@ -66,7 +66,7 @@ POST : http://localhost:8080/v1/json
 
 ### Refresh Token
 
-> [POST] /auth/refresh - Refresh Token by Refresh Token
+> [POST] /auth/refresh - Refresh by refreshToken
 
 # Change Logs
 #### 0.1  - Added redis and mongodb for save users
