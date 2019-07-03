@@ -38,14 +38,19 @@ router.get('/findPassword', [], function(req, res, next) {
  *  Change Password
  *  express optional params :params?
  *****************************/
-router.get('/chpass/:authCode', [], function(req, res, next) {
+router.get('/chpass/:chPassCode', [], function(req, res, next) {
 	var resData = {
 		"state_code" : "100",
 		"state_message" : "ok" 
 	}
 
-	console.log(req.params.authCode)
-	res.render('auth/findPassword',resData);
+	//Check redis authCode doesn't expire
+	redis_common.get('chPassCode:' + req.params.chPassCode, function(err, reply){
+		console.log(reply)
+	})
+
+	console.log(req.params.chPassCode)
+	res.render('auth/chPass',resData);
 }).post('/chpass',[], AuthCtr.chPass)
 
 /*****************************

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken');
-
+const uuid = require('uuid/v4');
 // require Controllers
 const MailerCtr = require('./MailerController')
 
@@ -98,8 +98,17 @@ exports.sendChPassCode = function(req, res){
             } else {
     
                 //console.log(userInfo.email)
+                var authCode = uuid()
+                var expireTime = 60*Number(ENV.FINDPASSWORD_CODE_EXPIRE)
+                
+                var collection_chPassCode = 'chPassCode:' + authCode.toString()
+                console.log(collection_chPassCode)
+                redis_common.set(collection_chPassCode, userInfo._id)
+                redis_common.expire(collection_chPassCode, expireTime)
 
-                MailerCtr.sendMail(ENV.SMTP_NOREPLY_USER, userInfo.email, 'Change Passworkd link', '');
+                var chPassAuthUrl = ENV.APP_URL + "/auth/chPass/" + authCode
+                console.log(authCode)
+                MailerCtr.sendMail(ENV.SMTP_NOREPLY_USER, userInfo.email, 'Change Passworkd link', chPassAuthUrl);
             }
         });
 
