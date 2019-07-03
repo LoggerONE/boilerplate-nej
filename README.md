@@ -58,7 +58,7 @@ POST : http://localhost:8080/v1/json
 
 > [POST] /auth/findPAssword - Send a code to email for change password
 
-> [GET] /auth/chpass/:authCode - Change user password * require authCode
+> [GET] /auth/chpass/:chPassCode - Change user password * require chPassCode
 
 
 # Change Logs
