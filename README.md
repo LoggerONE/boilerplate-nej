@@ -60,6 +60,8 @@ POST : http://localhost:8080/v1/json
 
 > [GET] /auth/chpass/:chPassCode - Change user password * require chPassCode
 
+> [POST] /auth/chpass - Change user password request
+
 
 # Change Logs
 #### 0.1  - Added redis and mongodb for save users

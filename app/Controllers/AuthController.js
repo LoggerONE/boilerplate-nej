@@ -127,7 +127,11 @@ exports.sendChPassCode = function(req, res){
 }
 
 exports.chPass = function(req, res){
-
+    var resData = {
+        "state_code" : "100",
+        "state_message" : "success"
+    }
+    return res.json(resData);
 }
 
 exports.refresh = function(req, res){

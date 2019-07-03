@@ -46,7 +46,7 @@ router.get('/chpass/:chPassCode', [], function(req, res, next) {
 
 	//Check redis authCode doesn't expire
 	var chPassCodeCollection = 'chPassCode:' + req.params.chPassCode
-	redis_common.get('chPassCode:' + req.params.chPassCode, function(err, reply){
+	redis_common.get(chPassCodeCollection, function(err, reply){
 		
 
 		
