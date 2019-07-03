@@ -18,13 +18,13 @@ exports.sendMail = function(mailFrom, mailTo, subject, text, html){
     let info = transporter.sendMail({
         from: mailFrom, // sender address
         to: mailTo, // list of receivers
-        subject: "Find Password", // Subject line
-        text: "text", // plain text body
-        html: "text" // html body 
+        subject: subject, // Subject line
+        text: text, // plain text body
+        html: html // html body 
     });
  
-    console.log("Message sent: %s", info.messageId);
+    //console.log("Message sent: %s", info.messageId);
   
     // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };

@@ -43,13 +43,16 @@ $('document').ready(function(){
     });
 
     $("#btn-send-chpass-code").click(function(){
-        var email = $.trim($("#send-chpass-email").val());
-        
+
+        var reqPath = '/auth/findPassword'
+
+        var email = $.trim($("#email-find-password").val());
+
         var reqData = {
             email : email
         }
         
-        requestAuth(reqData);
+        requestAuth(reqPath, reqData);
     });
 
     $("#btn-chpass").click(function(){

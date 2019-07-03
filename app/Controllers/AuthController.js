@@ -77,11 +77,40 @@ exports.signin = function(req, res) {
 /* Send Code for change password */
 exports.sendChPassCode = function(req, res){
     var resData = {
-        "state_code" : "100",
-        "state_message" : "ok",
+        "state_code" : "200",
+        "state_message" : "error"
     }
 
-    MailerCtr.sendMail('noreply@wrdevs.com','dnejrwhd@gmail.com');
+        console.log(req.body)
+    
+    if(req.body.email == ''){
+        return res.status(500).json(resData);
+    }else{
+
+        UsersMdl.findOne({email:req.body.email}, function(err, userInfo){
+            if (err) { // User doesn't exists
+                var resData = {
+                    "state_code" : "201",
+                    "state_message" : "error"
+                }
+                return res.status(500).json(resData);
+                
+            } else {
+    
+                //console.log(userInfo.email)
+
+                MailerCtr.sendMail(ENV.SMTP_NOREPLY_USER, userInfo.email, 'Change Passworkd link', '');
+            }
+        });
+
+    }
+    
+    
+
+    /*
+     * exports.sendMail = function(mailFrom, mailTo, subject, text, html){ 
+     */
+    //MailerCtr.sendMail('noreply@wrdevs.com','dnejrwhd@gmail.com', 'change Password', 'hi');
     res.json(resData)
 }
 

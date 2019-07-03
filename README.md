@@ -20,7 +20,7 @@ cp ./.env.example ./.env
 node index.js
 ```
  
-# If u using pm2
+# Using pm2
 
 ```
 pm2 start process.yml
