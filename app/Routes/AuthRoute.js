@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-var AuthCtr = require('../Controllers/AuthController');
+var AuthCtr = require('../Controllers/AuthController')
 
 
 /*****************************
@@ -9,7 +9,7 @@ var AuthCtr = require('../Controllers/AuthController');
 *****************************/
 router.get('/signup', [], function(req, res, next) {
 
-	res.render('auth/signup');
+	res.render('auth/signup')
 }).post('/signup',[], AuthCtr.signup)
 
 
@@ -32,7 +32,7 @@ router.get('/findPassword', [], function(req, res, next) {
 	}
 
 	res.render('auth/findPassword',resData);
-}).post('/findPassword',[], AuthCtr.sendChPassCode);
+}).post('/findPassword',[], AuthCtr.sendChPassCode)
 
 /*****************************
  *  Change Password
@@ -45,12 +45,47 @@ router.get('/chpass/:chPassCode', [], function(req, res, next) {
 	}
 
 	//Check redis authCode doesn't expire
+	var chPassCodeCollection = 'chPassCode:' + req.params.chPassCode
 	redis_common.get('chPassCode:' + req.params.chPassCode, function(err, reply){
-		console.log(reply)
+		
+
+		
+		if(err){
+			var resData = {
+				"state_code" : "201",
+				"state_message" : "error"
+			}
+			return res.status(500).json(resData);			
+		}
+
+		if(reply != null){ // chPassCode exists
+			
+			//Expire chPassCode Collection
+			redis_common.del(chPassCodeCollection)
+
+			var chPassData = JSON.parse(reply)
+			var user_id = chPassData.user_id
+			
+			/* Test Code */
+			var resData = {
+				"state_code" : "100",
+				"state_message" : "code Success"
+			}
+			return res.json(resData);	
+
+			//res.render('auth/chPass',resData)
+		}else{// chPassCode doesn't exists
+			var resData = {
+				"state_code" : "201",
+				"state_message" : "code expired"
+			}
+			return res.status(500).json(resData);	
+		}
+
+		
 	})
 
-	console.log(req.params.chPassCode)
-	res.render('auth/chPass',resData);
+
 }).post('/chpass',[], AuthCtr.chPass)
 
 /*****************************

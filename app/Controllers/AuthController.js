@@ -100,10 +100,13 @@ exports.sendChPassCode = function(req, res){
                 //console.log(userInfo.email)
                 var authCode = uuid()
                 var expireTime = 60*Number(ENV.FINDPASSWORD_CODE_EXPIRE)
-                
+                var setData = {
+                    user_id : userInfo._id
+                }
+
                 var collection_chPassCode = 'chPassCode:' + authCode.toString()
-                console.log(collection_chPassCode)
-                redis_common.set(collection_chPassCode, userInfo._id)
+                
+                redis_common.set(collection_chPassCode, JSON.stringify(setData) )
                 redis_common.expire(collection_chPassCode, expireTime)
 
                 var chPassAuthUrl = ENV.APP_URL + "/auth/chPass/" + authCode
