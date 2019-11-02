@@ -18,7 +18,7 @@
     "i18n": "^0.8.3",
     "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.7.5",
     "nodemailer": "^6.2.1",
     "uuid": "^3.3.2"
   }
